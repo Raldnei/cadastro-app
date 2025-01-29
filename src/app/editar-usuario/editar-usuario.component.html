@@ -1,0 +1,93 @@
+<div>
+    <h1>Editar Usuário</h1>
+  
+    <!-- Campo para buscar por CPF -->
+    <div>
+      <label for="cpfBusca">Buscar por CPF:</label>
+      <input
+        id="cpfBusca"
+        [(ngModel)]="cpfBusca"
+        placeholder="Digite o CPF"
+        (input)="formatarCpf($event)" maxlength="14"
+      />
+      <button (click)="buscarUsuario()">Buscar</button>
+    </div>
+  
+    <!-- Formulário de edição -->
+    <form *ngIf="usuario" (ngSubmit)="salvarAlteracoes()">
+      <div>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" [(ngModel)]="usuario.tipo" name="tipo">
+          <option value="Cliente">Cliente</option>
+          <option value="Fornecedor/Serviço">Fornecedor/Serviço</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="tamanhoPet">Tamanho do Pet:</label>
+        <select id="tamanhoPet" [(ngModel)]="usuario.tamanhoPet" name="tamanhoPet">
+          <option value="Pequeno">Até 5 kg</option>
+          <option value="Médio">Até 15 kg</option>
+          <option value="Grande">Mais de 15kg</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="servico">Serviço:</label>
+        <select id="servico" [(ngModel)]="usuario.servico" name="servico">
+            <option value="Passeio">Passeio</option>
+            <option value="Banho e Tosa">Banho e Tosa</option>
+            <option value="Petshop">Petshop</option>
+            <option value="Vacinação">Vacinação</option></select>
+      </div>
+  
+      <div>
+        <label for="valor">Valor:</label>
+        <input
+          id="valor"
+          [(ngModel)]="usuario.valor"
+          name="valor"
+          type="text"
+          (input)="formatValor($event)" maxlength="12"
+        />
+      </div>
+      
+  
+      <div>
+        <label for="nome">Nome:</label>
+        <input id="nome" [(ngModel)]="usuario.nome" name="nome" />
+      </div>
+  
+      <!-- Campo de Data de Nascimento desabilitado -->
+     
+  
+      <div>
+        <label for="telefone">Telefone:</label>
+        <input
+          id="telefone"
+          [(ngModel)]="usuario.telefone"
+          name="telefone"
+          (input)="formatTelefone($event)" maxlength="15"
+        />
+      </div>
+  
+      <!-- Campo de CPF já está com o atributo readonly -->
+      <div>
+        <label for="cpf">CPF:</label>
+        <input
+          id="cpf"
+          [(ngModel)]="usuario.cpf"
+          name="cpf"
+          (input)="formatarCpf($event)"
+          readonly
+        />
+      </div>
+  
+      <button type="submit">Salvar Alterações</button>
+    </form>
+  
+    <!-- Mensagem de feedback -->
+    <p *ngIf="mensagem">{{ mensagem }}</p>
+  </div>
+  

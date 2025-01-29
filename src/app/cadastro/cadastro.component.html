@@ -1,0 +1,124 @@
+<div class="container mt-5">
+    <h2>Cadastro</h2>
+    <form (submit)="onSubmit()">
+      <!-- Tipo de Usuário -->
+      <div class="form-group">
+        <label>Qual tipo de usuário você é?</label>
+        <div class="btn-group" role="group" aria-label="Tipo de Usuário">
+            <button type="button" 
+                    class="btn btn-outline-primary" 
+                    [ngClass]="{ 'selected': usuario.tipo === 'Cliente' }" 
+                    (click)="setTipoUsuario('Cliente')">Cliente</button>
+                    
+            <button type="button" 
+                    class="btn btn-outline-primary" 
+                    [ngClass]="{ 'selected': usuario.tipo === 'Fornecedor/Servicos' }" 
+                    (click)="setTipoUsuario('Fornecedor/Servicos')">Fornecedor de Serviço</button>
+          </div></div>
+    
+  
+      
+      <div class="form-group">
+        <label>Qual o tamanho do Pet?</label>
+        <div class="btn-group" role="group" aria-label="Tamanho do Pet">
+          <button type="button" 
+                  class="btn btn-outline-primary" 
+                  [ngClass]="{ 'selected': usuario.tamanhoPet === 'Até 5 kg' }" 
+                  (click)="setTamanhoPet('Até 5 kg')">Até 5 kg</button>
+          <button type="button" 
+                  class="btn btn-outline-primary" 
+                  [ngClass]="{ 'selected': usuario.tamanhoPet === 'Até 15 kg' }" 
+                  (click)="setTamanhoPet('Até 15 kg')">Até 15 kg</button>
+          <button type="button" 
+                  class="btn btn-outline-primary" 
+                  [ngClass]="{ 'selected': usuario.tamanhoPet === 'Mais de 15 kg' }" 
+                  (click)="setTamanhoPet('Mais de 15 kg')">Mais de 15 kg</button>
+        </div>
+      </div>
+      
+  
+      <!-- Serviços -->
+      <div class="form-group">
+        <label>Selecione o serviço:</label>
+        <div class="btn-group" role="group" aria-label="Serviços">
+          <button type="button" class="btn btn-outline-primary" 
+            [ngClass]="{ 'selected': usuario.servico === 'Passeio' }"
+            (click)="setServico('Passeio')">Passeio</button>
+          <button type="button" class="btn btn-outline-primary" 
+            [ngClass]="{ 'selected': usuario.servico === 'Banho e Tosa' }"
+            (click)="setServico('Banho e Tosa')">Banho e tosa</button>
+          <button type="button" class="btn btn-outline-primary" 
+            [ngClass]="{ 'selected': usuario.servico === 'Petshop' }"
+            (click)="setServico('Petshop')">Petshop</button>
+          
+            <button type="button" class="btn btn-outline-primary" 
+            [ngClass]="{ 'selected': usuario.servico === 'Vacinação' }"
+            (click)="setServico('Vacinação')">Vacinação</button>
+        </div>
+      </div>
+      
+  
+      <!-- Valor do Serviço -->
+      <div class="form-group">
+        <label>Qual o valor do serviço?</label>
+        <input type="text" class="form-control" [(ngModel)]="valorExibicao" name="valor" (input)="formatValor($event)" required maxlength="12">
+      </div>
+  
+      <!-- Número para Contato -->
+      <div class="form-group">
+        <label>Número para contato:</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.telefone" name="telefone" (input)="formatTelefone($event)" required maxlength="15">
+      </div>
+  
+      <!-- Dados de Contato -->
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label>CPF</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.cpf" name="cpf" required maxlength="14" (input)="formatarCpf($event)">
+      </div>
+      
+  
+      <div class="form-group">
+        <label>Data do Nascimento</label>
+        <input type="date" class="form-control" [(ngModel)]="usuario.dataNascimento" name="dataNascimento" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+  </div>
+  <div class="mt-4">
+    <h3 class="text-center mb-4">Usuários Cadastrados</h3>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Tipo</th>
+      <th>Tamanho Pet</th>
+      <th>Serviço</th>
+      <th>Valor</th>
+      <th>Telefone</th>
+      <th>Data Nasc.</th>
+      <th>CPF</th> <!-- Adicionando a coluna CPF -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of usuariosCadastrados">
+      <td>{{ user.nome }}</td>
+      <td>{{ user.tipo }}</td>
+      <td>{{ user.tamanhoPet }}</td>
+      <td>{{ user.servico }}</td>
+      <td>R$ {{ user.valor | number:'1.2-2' }}</td>
+      <td>{{ user.telefone }}</td>
+      <td>{{ user.dataNascimento }}</td> 
+      <td>{{ user.cpf }}</td> 
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+  
